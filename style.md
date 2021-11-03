@@ -96,7 +96,7 @@ row before the </tbody></table> line.
   - [Local Variable Declarations](#local-variable-declarations)
   - [nil is a valid slice](#nil-is-a-valid-slice)
   - [Reduce Scope of Variables](#reduce-scope-of-variables)
-  - [Avoid Naked Parameters](#avoid-naked-parameters)
+  - [Replace booleans with custom types](#replace-booleans-with-custom-types)
   - [Use Raw String Literals to Avoid Escaping](#use-raw-string-literals-to-avoid-escaping)
   - [Initializing Structs](#initializing-structs)
       - [Use Field Names to Initialize Structs](#use-field-names-to-initialize-structs)
@@ -2883,34 +2883,9 @@ return nil
 </td></tr>
 </tbody></table>
 
-### Avoid Naked Parameters
+### Replace booleans with custom types
 
-Naked parameters in function calls can hurt readability. Add C-style comments
-(`/* ... */`) for parameter names when their meaning is not obvious.
-
-<table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
-<tbody>
-<tr><td>
-
-```go
-// func printInfo(name string, isLocal, done bool)
-
-printInfo("foo", true, true)
-```
-
-</td><td>
-
-```go
-// func printInfo(name string, isLocal, done bool)
-
-printInfo("foo", true /* isLocal */, true /* done */)
-```
-
-</td></tr>
-</tbody></table>
-
-Better yet, replace naked `bool` types with custom types for more readable and
+Replace naked `bool` types with custom types for more readable and
 type-safe code. This allows more than just two states (true/false) for that
 parameter in the future.
 
